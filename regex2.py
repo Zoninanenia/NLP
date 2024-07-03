@@ -7,8 +7,8 @@ customer = input("How can I help you ? :")
 process = "Inprocess"
 
 while process != "Done":
-    if re.match(r"\b[qQ]ueue\s(?P<store>.*)\b", customer) :
-        res = re.match(r"\b[qQ]ueue\s(?P<store>.*)\b", customer)
+    if re.match(r"(.*[qQ]ueue.*\s)(?P<store>.*)\b", customer) :
+        res = re.match(r"(.*[qQ]ueue.*\s)(?P<store>.*)\b", customer)
         store = res.group('store')
         customer = input(f"Please enter the number of seats you want to make a reservation for {store}. : ")
 
@@ -26,12 +26,10 @@ while process != "Done":
     
     elif re.search(r"\b[Uu]nqueue", customer) :
         res = re.search(r"\b[Uu]nqueue", customer)
-        customer = input(f"Are you sure you want to cancel your queue for {store}. : ")
-        if re.match(r"\b[yY]es|[nN]o", customer) :
-            res = re.match(r"\b[yY]es|[nN]o", customer)
-            if res == "yes" or "Yes" :
-                print(f"OK ! You already cancel your queue")
-                process = "Done"
+        customer = input(f"Type 'yes' to unqueue : ")
+        if re.match(r"\b[yY]es", customer) :
+            print(f"OK ! You already cancel your queue")
+            process = "Done"
         
     else:
         print("I Don't understand what are you trying to say, Please repeat it again.")
